@@ -1,0 +1,33 @@
+class Solution:
+    def searchRange(self, nums: List[int], target: int) -> List[int]:
+        start = self.binarySearchLeft(nums, target)
+        end = self.binarySearchRight(nums, target)
+        return [start, end] if start <= end else [-1, -1]
+
+    def binarySearchLeft(self, nums: List[int], target: int) -> int:
+        low = 0
+        high = len(nums)-1
+
+        while low <= high:
+            mid = (low + high)//2
+
+            if nums[mid] < target:
+                low = mid+1
+
+            else:
+                high = mid-1
+        return low
+    
+    def binarySearchRight(self, nums: List[int], target: int) -> int:
+        low = 0
+        high = len(nums)-1
+
+        while low <= high:
+            mid = (low + high)//2
+
+            if nums[mid] <= target:
+                low = mid+1
+
+            else:
+                high = mid-1
+        return high
