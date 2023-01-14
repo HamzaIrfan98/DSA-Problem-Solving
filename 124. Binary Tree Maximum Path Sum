@@ -1,0 +1,20 @@
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+class Solution:
+    def maxPathSum(self, root: Optional[TreeNode]) -> int:
+        self.ans = float('-inf')
+        self.calc_sum(root)
+        return self.ans
+
+    def calc_sum(self, root):
+        if root is None: return 0
+        lsum = self.calc_sum(root.left)
+        rsum = self.calc_sum(root.right)
+
+        max_track = max((root.val + max(lsum, rsum)), root.val)
+        self.ans = max(self.ans, max_track, (root.val + lsum + rsum))
+        return max_track
